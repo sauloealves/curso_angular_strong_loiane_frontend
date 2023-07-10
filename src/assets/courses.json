@@ -1,0 +1,52 @@
+[
+  {
+    "_id": "1",
+    "name": "Angular",
+    "category": "front-end"
+  },
+  {
+    "_id": "2",
+    "name": "React",
+    "category": "front-end"
+  },
+  {
+    "_id": "3",
+    "name": "Vue.js",
+    "category": "front-end"
+  },
+  {
+    "_id": "4",
+    "name": "Python",
+    "category": "back-end"
+  },
+  {
+    "_id": "5",
+    "name": "Java",
+    "category": "back-end"
+  },
+  {
+    "_id": "6",
+    "name": "Ruby",
+    "category": "back-end"
+  },
+  {
+    "_id": "7",
+    "name": "C++",
+    "category": "programming"
+  },
+  {
+    "_id": "8",
+    "name": "JavaScript",
+    "category": "programming"
+  },
+  {
+    "_id": "9",
+    "name": "HTML",
+    "category": "programming"
+  },
+  {
+    "_id": "10",
+    "name": "CSS",
+    "category": "programming"
+  }
+]
