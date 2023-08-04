@@ -7,6 +7,7 @@ import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/err
 
 import { CoursesService } from '../../services/courses.service';
 import { Course } from './model/course';
+import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-courses',
@@ -36,27 +37,35 @@ export class CoursesComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  onAdd(){
-    this.router.navigate(['new'], {relativeTo: this.route});
+  onAdd() {
+    this.router.navigate(['new'], { relativeTo: this.route });
   }
 
-  onEdit(course: Course){
-    this.router.navigate(["edit", course._id], {relativeTo: this.route});
+  onEdit(course: Course) {
+    this.router.navigate(["edit", course._id], { relativeTo: this.route });
 
   }
 
-  onDelete(id: number){
-    this.courseService.delete(id)
-    .subscribe(
-      () => {
-      this.snackBar.open("Curso removido com sucesso", 'X',{ duration: 5000, verticalPosition: 'top', horizontalPosition:'center'});
-      this.refresh();
-    },
-      error => this.onError("Erro ao remover o curso")
-    );
+  onDelete(id: number) {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: "Deseja realmente excluir esse curso ?",
+    });
+
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result) {
+        this.courseService.delete(id)
+          .subscribe(
+            () => {
+              this.snackBar.open("Curso removido com sucesso", 'X', { duration: 5000, verticalPosition: 'top', horizontalPosition: 'center' });
+              this.refresh();
+            },
+            error => this.onError("Erro ao remover o curso")
+          );
+      }
+    });
   }
 
-  refresh(){
+  refresh() {
     this.courses$ = this.courseService.list()
       .pipe(
         catchError(error => {
